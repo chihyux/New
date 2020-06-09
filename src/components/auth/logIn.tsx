@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import firebase from '../../config/config'
 import { Auth } from '../../contexts/authContext'
+import { startFirebaseUI } from '../../config/uiConfig'
 
 const LogIn:React.FC = () => {
     const [email, setEmail] = useState('')
@@ -10,7 +11,10 @@ const LogIn:React.FC = () => {
 
     const {state, dispatch} = useContext(Auth)
 
-    console.log(state)
+    useEffect(() => {
+        startFirebaseUI('#firebaseui')
+   })
+   
     const fetchLogin = async(email:string, password:string) => {
         const user = await firebase.auth().signInWithEmailAndPassword(email,password)
         .catch(err => {
@@ -81,8 +85,9 @@ const LogIn:React.FC = () => {
                 <div>
                     <button type='submit'>登入</button>
                     <Link to='/signUp'><button>註冊</button></Link>
-                    <div className="g-signin2" data-onsuccess="onSignIn" onClick={googleLogin}></div>
+                    <button onClick={googleLogin}></button>
                 </div>
+                <div id="firebaseui"></div>
             </form>
         </div>
     )
