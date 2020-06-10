@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, withRouter, Redirect } from 'react-router-dom'
 import firebase from '../../config/config'
 import { Auth } from '../../contexts/authContext'
+import { Menu, Button, Space, Avatar } from 'antd'
+import { Logo } from './Styled'
+import { UserOutlined } from '@ant-design/icons';
+import Cart from '../cart/index'
 
 const Navbar: React.FC = () => {
-    const[userState, setUserState] = useState(null)
-    const[userEmail, setUserEmail] = useState('')
-
-    const{state, dispatch} = useContext(Auth)
+    const{state, dispatch, openNotification} = useContext(Auth)
 
     const fetchLogOut = async() => {
         const logout = await firebase.auth().signOut()
@@ -18,55 +19,46 @@ const Navbar: React.FC = () => {
         return logout
     }
         
-    //check state
-    const getUserState = async() => {
-        return new Promise(resolve => {
-            firebase.auth().onAuthStateChanged(resolve)
-        })
-    }
-
-    useEffect(()=> {
-        getUserState().then((user:any) => { 
-            if(user) {
-                setUserState(user)
-                setUserEmail(user.email)
-            }
-        })
-    })
-
     const logout = () => {
         fetchLogOut()
-        setUserState(null)
+        openNotification('LogOut')
         return dispatch({
             type:'LOGOUT_SUCCESS',
-            payload: {}
+            payload: null
         })
     }
+    
 
     let button;
-    if(userState !== null || state.user.hasOwnProperty('user')) {
+    if (state.user !== null) {
         button = (
-        <>
-        <div>{userEmail}</div>
-        <button onClick={logout}>登出</button>
-        </> 
+        <Space size='middle' style={{ float: 'right' }}>
+        <Cart/>
+        <Space>
+            <Avatar style={{ backgroundColor: '#ffbf00' }} size='small' icon={<UserOutlined />} />
+            <span>{state.user}</span>
+        </Space>
+        <Button type='dashed' onClick={logout}>登出</Button>
+        </Space> 
         )
-       
     } else {
         button = (
-            <>
-            <Link to='/login'>登入</Link>
-            <Link to='/signup'>註冊</Link>
-            </>
+            <Space size='middle' style={{ float: 'right' }}>
+            <Button type='dashed'><Link to='/login'>登入</Link></Button>
+            <Button type='primary'><Link to='/signup'>註冊</Link></Button>
+            </Space>
         )
     }
 
     return (
         <>
-            <Link to='/'>Home</Link>
-            <Link to='/products'>Products</Link>
-            <Link to='/products/new'>New</Link>
-            {button}
+        <Logo className='logo'></Logo>
+        <Menu mode='horizontal' style={{ padding: '0 50px 0 100px' }}>
+                <Menu.Item key="1"><Link to='/'>Home</Link></Menu.Item>
+                <Menu.Item key="2"><Link to='/products'>Products</Link></Menu.Item>
+                <Menu.Item key="3"><Link to='/new'>New</Link></Menu.Item>
+                {button}
+        </Menu>
         </>
     )
 }

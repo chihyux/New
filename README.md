@@ -1,3 +1,21 @@
+# Shopping cart
+demo shopping websit by using React Hooks / Context / Reducer.
+database: firebase
+framework: ant design
+
+1. firebase authentication
+users authenticate with Firebase using their email addresses and passwords
+users authenticate with Google Accounts by integrating Google Sign-In
+
+2. router redirect
+
+
+## Installing
+1. clone this project
+2. run yarn
+3. run yarn start
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

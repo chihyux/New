@@ -1,26 +1,59 @@
-import React, { createContext, Context, useState, useReducer } from 'react'
+import React, { createContext, Context, useState, useReducer, useEffect } from 'react'
 import { firebaseAuth } from '../reducer/authReducer'
-import { Products, AuthContext } from '../types/store'
+import { Products, IContext, IState } from '../types/store'
+import firebase from '../config/config'
+import { notification } from 'antd';
 
 const productList: Products[] = []
 const orderList: Products[]  = []
 
-const initialState: AuthContext = {
-    user: {
-        email: '',
-        password: ''
-    },
+export const Auth = createContext({} as IContext)
+
+const initialState:IState = {
+    user: null,
     authMessage: null
 }
 
-export const Auth: Context<AuthContext> = createContext<AuthContext>(
-    initialState
-)
-
 export const AuthProvider:React.FC<{}> = ({ children }) => {
     const [state, dispatch] = useReducer(firebaseAuth, initialState)
-    const value:any = { state, dispatch }
-    
+    const [api, contextHolder] = notification.useNotification();
+
+    // useEffect(() => {
+    //     sessionStorage.setItem('user', JSON.stringify(state));
+    // }, [state])
+
+    // const [currentUser, setCurrentUser] = useState<string>('')
+    // useEffect(() => {
+    //     console.log('update')
+    //     findCurrentUser()
+    // }, [])
+
+    // const findCurrentUser = () => {
+    //     firebase.auth().onAuthStateChanged(function(user:any) {
+    //         if(user) {
+    //            setCurrentUser(user.email) 
+    //         }
+    //     });
+    // }
+
+    // const rmC = () => {
+    //     setCurrentUser('')
+    // }
+
+    const des = (
+        <Auth.Consumer>
+            {({ state }) => `${state.authMessage}`}
+        </Auth.Consumer>
+    )
+
+    const openNotification = (placement:string) => {
+      api.info({
+        message: `Notification ${placement}`,
+        description: des
+      });
+    };
+
+    const value = { state, dispatch, openNotification, contextHolder}
     return (
         <Auth.Provider value={value}>
             {children}
