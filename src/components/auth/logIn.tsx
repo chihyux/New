@@ -15,9 +15,9 @@ const LogIn:React.FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [routeRedirect, setRouteRedirect] = useState(false)
-    const {state, dispatch, openNotification, contextHolder} = useContext(Auth)
+    const {state, dispatch, openNotification, contextHolder, currentUser} = useContext(Auth)
 
-    if(state.user) return <Redirect to="/" />
+    if(currentUser !== '') return <Redirect to="/" />
     if(routeRedirect) return <Redirect to='/' />
 
     const fetchLogin = async(email:string, password:string) => {
@@ -87,7 +87,6 @@ const LogIn:React.FC = () => {
                 >
             <Form.Item
                 label='email'
-                name="email"
             >
                 <label htmlFor='email'></label>
                 <Input prefix={<UserOutlined className="site-form-item-icon" />} 
@@ -97,7 +96,6 @@ const LogIn:React.FC = () => {
             </Form.Item>
             <Form.Item
                 label='password'
-                name="password"
             >
                 <label htmlFor='password'></label>
                 <Input prefix={<LockOutlined className="site-form-item-icon"/>}

@@ -32,11 +32,11 @@ export interface IContext {
     state: IState;
     // dispatch?: ({type}: {type:string}) => void;
     dispatch: any;
-    // currentUser: string;
+    currentUser: string;
     contextHolder: React.ReactNode;
     openNotification: (placement:string) => void;
     // findCurrentUser: () => void;
-    // rmC: () => void;
+    rmC: () => void;
 }
 
 export type IState = {

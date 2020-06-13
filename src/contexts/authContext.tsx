@@ -18,27 +18,24 @@ export const AuthProvider:React.FC<{}> = ({ children }) => {
     const [state, dispatch] = useReducer(firebaseAuth, initialState)
     const [api, contextHolder] = notification.useNotification();
 
-    // useEffect(() => {
-    //     sessionStorage.setItem('user', JSON.stringify(state));
-    // }, [state])
+    const [currentUser, setCurrentUser] = useState<string>('')
+    
+    useEffect(() => {
+        console.log('update')
+        findCurrentUser()
+    }, [])
 
-    // const [currentUser, setCurrentUser] = useState<string>('')
-    // useEffect(() => {
-    //     console.log('update')
-    //     findCurrentUser()
-    // }, [])
+    const findCurrentUser = () => {
+        firebase.auth().onAuthStateChanged(function(user:any) {
+            if(user) {
+               setCurrentUser(user.email) 
+            }
+        });
+    }
 
-    // const findCurrentUser = () => {
-    //     firebase.auth().onAuthStateChanged(function(user:any) {
-    //         if(user) {
-    //            setCurrentUser(user.email) 
-    //         }
-    //     });
-    // }
-
-    // const rmC = () => {
-    //     setCurrentUser('')
-    // }
+    const rmC = () => {
+        setCurrentUser('')
+    }
 
     const des = (
         <Auth.Consumer>
@@ -53,7 +50,7 @@ export const AuthProvider:React.FC<{}> = ({ children }) => {
       });
     };
 
-    const value = { state, dispatch, openNotification, contextHolder}
+    const value = { state, dispatch, openNotification, contextHolder, currentUser,rmC}
     return (
         <Auth.Provider value={value}>
             {children}

@@ -11,9 +11,9 @@ const SignUp:React.FC = () => {
     const [password, setPassword] = useState('')
     const [routeRedirect, setRouteRedirect] = useState(false)
 
-    const {state, dispatch, openNotification, contextHolder} = useContext(Auth)
+    const {state, dispatch, openNotification, contextHolder, currentUser} = useContext(Auth)
 
-    if(state.user) return <Redirect to="/" />;
+    if(currentUser !== '') return <Redirect to="/" />;
     if(routeRedirect) return <Redirect to='/' />
 
     const postSignUp = async (email:string, password:string) => {
@@ -29,9 +29,6 @@ const SignUp:React.FC = () => {
     return user
   }
     const signup = async() => {
-        // console.log(state)
-        // e.preventDefault()
-        // console.log('form sent')
         let res = await postSignUp(email, password)
         if(res) {
             setRouteRedirect(true)
@@ -50,12 +47,12 @@ const SignUp:React.FC = () => {
           {contextHolder}
           <h5>註冊帳號</h5>
           <Form
-              className="login-form"
+              name='signup-form'
+              className="signup-form"
               onFinish={signup}
               >
           <Form.Item
               label='email'
-              name="email"
           >
               <label htmlFor='email'></label>
               <Input prefix={<UserOutlined className="site-form-item-icon" />} 
@@ -65,7 +62,6 @@ const SignUp:React.FC = () => {
           </Form.Item>
           <Form.Item
               label='password'
-              name="email"
           >
               <label htmlFor='password'></label>
               <Input prefix={<LockOutlined className="site-form-item-icon"/>}

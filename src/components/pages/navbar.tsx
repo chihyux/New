@@ -8,7 +8,7 @@ import { UserOutlined } from '@ant-design/icons';
 import Cart from '../cart/index'
 
 const Navbar: React.FC = () => {
-    const{state, dispatch, openNotification} = useContext(Auth)
+    const{state, dispatch, openNotification, currentUser, rmC} = useContext(Auth)
 
     const fetchLogOut = async() => {
         const logout = await firebase.auth().signOut()
@@ -22,6 +22,7 @@ const Navbar: React.FC = () => {
     const logout = () => {
         fetchLogOut()
         openNotification('LogOut')
+        rmC()
         return dispatch({
             type:'LOGOUT_SUCCESS',
             payload: null
@@ -30,13 +31,13 @@ const Navbar: React.FC = () => {
     
 
     let button;
-    if (state.user !== null) {
+    if (currentUser !== '') {
         button = (
         <Space size='middle' style={{ float: 'right' }}>
         <Cart/>
         <Space>
             <Avatar style={{ backgroundColor: '#ffbf00' }} size='small' icon={<UserOutlined />} />
-            <span>{state.user}</span>
+            <span>{currentUser}</span>
         </Space>
         <Button type='dashed' onClick={logout}>登出</Button>
         </Space> 
