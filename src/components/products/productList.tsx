@@ -12,8 +12,8 @@ const ProductList = () => {
         <Row gutter={[16,32]}>
         {productList.map((product) => {
         return (
-            <Col xs={{ span: 12 }} sm={{ span: 8 }} md={{ span: 6 }} lg={{ span: 4 }}>
-            <Link to={'/detail/'+product.id}  key={product.id} >
+             <Col xs={{ span: 12 }} sm={{ span: 8 }} md={{ span: 6 }} lg={{ span: 4 }} key={product.id}>
+                <Link to={'/detail/'+product.id} >
                 <ProductListCard
                 hoverable
                 cover={<img alt={product.name} src={product.img} />}
@@ -21,15 +21,15 @@ const ProductList = () => {
                 <ListDetail>
                     <span className='name'>{product.name}</span>
                     <span>{
-                    product.size.map(i => {
-                        return <span>{i}</span> 
+                    product.size.map(size => {
+                        return <span key={size}>{size}</span> 
                     })
                     }</span>
                     <span>{product.color}</span>
                     <span>NT.$ {product.price}</span>  
                 </ListDetail>
                 </ProductListCard>
-            </Link>
+            </Link> 
             </Col>
             )
         })}
