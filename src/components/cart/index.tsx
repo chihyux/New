@@ -24,7 +24,7 @@ const Cart:React.FC = () => {
     
     const cartDetail = (
         <Drawer
-        title="Create a new account"
+        title="購物車商品"
         width={500}
         onClose={onClose}
         visible={visible}

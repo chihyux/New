@@ -1,12 +1,12 @@
 import React from 'react'
-import { renderRoutes, RouteConfig } from 'react-router-config'
+import ProductList from './productList'
+import { ProductListWrapper } from './Styled'
 
-const Products: React.FC = ({ route }: RouteConfig) => {
+const Products: React.FC = () => {
     return (
-        <>
-        <div>Products</div>
-        {renderRoutes(route && route.routes)}
-        </>
+        <ProductListWrapper>
+            <ProductList />      
+        </ProductListWrapper>
     )
 }
 

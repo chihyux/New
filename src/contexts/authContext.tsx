@@ -1,11 +1,8 @@
 import React, { createContext, Context, useState, useReducer, useEffect } from 'react'
 import { firebaseAuth } from '../reducer/authReducer'
-import { Products, IContext, IState } from '../types/store'
+import { IContext, IState } from '../types/store'
 import firebase from '../config/config'
 import { notification } from 'antd';
-
-const productList: Products[] = []
-const orderList: Products[]  = []
 
 export const Auth = createContext({} as IContext)
 
@@ -17,7 +14,6 @@ const initialState:IState = {
 export const AuthProvider:React.FC<{}> = ({ children }) => {
     const [state, dispatch] = useReducer(firebaseAuth, initialState)
     const [api, contextHolder] = notification.useNotification();
-
     const [currentUser, setCurrentUser] = useState<string>('')
     
     useEffect(() => {
@@ -28,7 +24,7 @@ export const AuthProvider:React.FC<{}> = ({ children }) => {
     const findCurrentUser = () => {
         firebase.auth().onAuthStateChanged(function(user:any) {
             if(user) {
-               setCurrentUser(user.email) 
+               setCurrentUser(user.email)
             }
         });
     }

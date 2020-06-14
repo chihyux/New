@@ -1,28 +1,47 @@
 import Home from './components/home/index'
 import New from './components/new/index'
 import Products from './components/products/index'
-import { RouteConfig } from '../node_modules/@types/react-router-config/index'
-import User from './components/user/index'
-import Detail from 'components/productsDetail'
+// import { RouteConfig } from '../node_modules/@types/react-router-config/index'
+import Detail from 'components/products/productDetail'
 import SignUp from 'components/auth/signUp'
 import LogIn from 'components/auth/logIn'
 import Nomatch from './components/pages/nomatch'
+import { Route, Switch, RouteProps } from 'react-router-dom'
+import Loadable from 'react-loadable';
+import React from 'react'
+
+interface RouteConfig {
+    component: RouteProps['component']
+    path: RouteProps['path']
+    exact?: RouteProps['exact']
+    routes?: [{
+         path:RouteProps['path'];
+         component: RouteProps['component'];
+    }]
+  }
 
 const routes: RouteConfig[] = [
             {
                 path:'/',
-                component: Home,
-                exact: true,
+                component: Loadable({
+                    loader: () => import('../src/components/home/index'),
+                    loading: () => <div>Loading...</div>
+                }),
+                exact: true
             },
             {
                 path:'/products',
                 component: Products,
                 routes: [
                     {
-                        path:'/products/:id',
-                        component: Detail,
+                        path:'/product/mars',
+                        component: Products
                     }
                 ]
+            },
+            {
+                path:'/detail/:id',
+                component: Detail,
             },
             {
                 path: '/new',
@@ -41,10 +60,6 @@ const routes: RouteConfig[] = [
             {
                 path:'/signUp',
                 component: SignUp,
-            },
-            {
-                path:'/user',
-                component: User,
             },
             {
                 path:'*',

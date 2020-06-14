@@ -23,10 +23,9 @@ const LogIn:React.FC = () => {
     const fetchLogin = async(email:string, password:string) => {
         // const user = await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
         // .then(()=> {
-        //     console.log('fetching...')
         //     return firebase.auth().signInWithEmailAndPassword(email,password)
         // })
-         const user = firebase.auth().signInWithEmailAndPassword(email,password)
+        const user = firebase.auth().signInWithEmailAndPassword(email,password)
         .catch(err => {
         openNotification('Login')
         return dispatch({

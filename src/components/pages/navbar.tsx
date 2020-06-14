@@ -8,7 +8,7 @@ import { UserOutlined } from '@ant-design/icons';
 import Cart from '../cart/index'
 
 const Navbar: React.FC = () => {
-    const{state, dispatch, openNotification, currentUser, rmC} = useContext(Auth)
+    const{state, dispatch, openNotification, currentUser, rmC, contextHolder } = useContext(Auth)
 
     const fetchLogOut = async() => {
         const logout = await firebase.auth().signOut()
@@ -53,6 +53,7 @@ const Navbar: React.FC = () => {
 
     return (
         <>
+        {contextHolder}
         <Logo className='logo'></Logo>
         <Menu mode='horizontal' style={{ padding: '0 50px 0 100px' }}>
                 <Menu.Item key="1"><Link to='/'>Home</Link></Menu.Item>
