@@ -29,7 +29,7 @@ export const AuthProvider:React.FC<{}> = ({ children }) => {
         });
     }
 
-    const rmC = () => {
+    const removeCurrentUser = () => {
         setCurrentUser('')
     }
 
@@ -46,7 +46,7 @@ export const AuthProvider:React.FC<{}> = ({ children }) => {
       });
     };
 
-    const value = { state, dispatch, openNotification, contextHolder, currentUser,rmC}
+    const value = { state, dispatch, openNotification, contextHolder, currentUser,removeCurrentUser}
     return (
         <Auth.Provider value={value}>
             {children}

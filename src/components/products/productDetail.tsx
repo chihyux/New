@@ -23,18 +23,22 @@ const Detail = () => {
         setCount(value)
     }
 
-    const AddCart = (product:object) => {
+    const AddCart = (product:any) => {
         console.log('add Cart')
         const authUser = firebase.auth().currentUser
         if(authUser) {
-            const userOrdered = firebase.firestore().collection('ordered').doc(authUser.uid)
-            userOrdered.update({
-            orderList: firebase.firestore.FieldValue.arrayUnion({ 
-                ...product, 
-                size: size,
-                count: count
-            })
-        })
+            const id = product.id
+            const userOrdered = firebase.firestore().collection('cartList').doc(authUser.uid)
+            .set({
+                ['userCart' + id]: {
+                    ...product, 
+                    size: size,
+                    count: count
+                }
+            },{ merge: true })
+            .then( err => console.log(err) )
+            
+            return userOrdered
         }
     }
 

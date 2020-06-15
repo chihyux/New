@@ -58,7 +58,7 @@ export interface IContext {
     currentUser: string;
     contextHolder: React.ReactNode;
     openNotification: (placement:string) => void;
-    rmC: () => void;
+    removeCurrentUser: () => void;
 }
 
 export type IState = {

@@ -2,23 +2,25 @@ import React,{ useState, useEffect } from 'react'
 import { Button, Drawer, List, Skeleton } from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import firebase from '../../config/config'
+import { firestore } from 'firebase';
 
 const Cart:React.FC = () => {
     const [visible, setVisible] = useState(false)
-    const [cartList, setCartList] = useState([])
+    const [cartList, setCartList] = useState([] as any)
+
+    const authUser = firebase.auth().currentUser
 
     useEffect(() => {
-        const authUser = firebase.auth().currentUser
         if(authUser) {
         const unsubscribe = firebase.firestore()
-        .collection('ordered')
+        .collection('cartList')
         .doc(authUser.uid)
         .onSnapshot((doc) => {
           const cartList = doc.data()
+          console.log(cartList)
           if(cartList) {
-              setCartList(cartList.orderList.map((item:any)=> {
-                return item
-              }))
+              const getList: string[] = [...Object.values(cartList)]
+              setCartList(getList)
           }
         })
     
@@ -26,18 +28,18 @@ const Cart:React.FC = () => {
         }
     }, [])
 
-    const remove = async(id:string) => {
+    const remove = (id:string) => {
         console.log('remove from cart')
-        const authUser = firebase.auth().currentUser
         if(authUser) {
-            const userCart = firebase.firestore().collection('ordered').doc(authUser.uid)
-            userCart.update({
-            orderList: firebase.firestore.FieldValue.arrayRemove({ 
-                id: id
+            const userCart = firebase.firestore().collection('cartList').doc(authUser.uid)
+            .update({
+                ['userCart' + id]: firebase.firestore.FieldValue.delete()
             })
-        })
+            .then( err => console.log(err) )
+            return userCart
         }
     }
+
     const showDrawer = () => {
         setVisible(!visible)
       }
@@ -46,6 +48,27 @@ const Cart:React.FC = () => {
         setVisible(!visible)
       }
     
+    const submit = (item: Array<string>) => {
+        const date = Date.now()
+        if(authUser) {
+            const userOrdered = firebase.firestore().collection('ordered').doc(authUser.uid)
+            .set({
+                [date]: {
+                List: [...item],
+                id: date,
+                date: new Date(),
+                status: 'pending'   
+                }
+            })  
+            .then(() => {
+                firebase.firestore().collection('cartList').doc(authUser.uid).delete()
+                setCartList([])
+            })
+            .then( err => console.log(err) )
+            return userOrdered
+        }
+    }
+
     const cartDetail = (
         <Drawer
         title="購物車商品"
@@ -53,7 +76,20 @@ const Cart:React.FC = () => {
         onClose={onClose}
         visible={visible}
         bodyStyle={{ paddingBottom: 80 }}
-        // footer={<button>送出</button>}
+        footer={
+            <div
+              style={{
+                textAlign: 'right',
+              }}
+            >
+              <Button onClick={onClose} style={{ marginRight: 8 }}>
+                取消
+              </Button>
+              <Button onClick={()=> submit(cartList)} type="primary">
+                確認購買
+              </Button>
+            </div>
+        }
         >
         <List
         itemLayout="horizontal"
