@@ -24,7 +24,7 @@ export const ProductDetail = styled.div`
 `
 // product List
 export const ProductListWrapper = styled.div`
-    width: 80%;
+    width: 70%;
     margin: 2em auto;
 `
 

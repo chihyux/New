@@ -16,7 +16,7 @@ export const Logo = styled.span`
       position: absolute;
       top: -6px;
       font-weight: 900;
-      color: #8eca92;
+      color: #3c3e3c;
       left: -11px;
       line-height: 1;
       font-family: 'Caveat', cursive;
