@@ -30,8 +30,8 @@ export const ProductListWrapper = styled.div`
 
 export const ProductListCard = styled(Card)`
     .ant-card-cover {
-        height: 250px;
         overflow: hidden;
+        img { height: 250px; }
     }
     .ant-card-body {
         padding: 10px 0;

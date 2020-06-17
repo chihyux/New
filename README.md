@@ -1,6 +1,6 @@
 # Shopping cart
 demo shopping websit by using React Hooks / Context / Reducer.
-database: firebase
+database: firebase Cloud Firestore
 framework: ant design
 
 1. firebase authentication

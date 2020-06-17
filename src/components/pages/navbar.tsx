@@ -1,21 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Link, withRouter, Redirect } from 'react-router-dom'
+import React, { useContext } from 'react'
+import { Link, withRouter } from 'react-router-dom'
 import firebase from '../../config/config'
 import { Auth } from '../../contexts/authContext'
-import { Menu, Button, Space, Avatar } from 'antd'
-import { Logo } from './Styled'
-import { UserOutlined } from '@ant-design/icons';
+import { Menu, Button, Space } from 'antd'
+import { Logo, BtnWrapper } from './Styled'
 import Cart from '../cart/index'
+import DropMenu from './dropMenu'
 
 const Navbar: React.FC = () => {
     const{state, dispatch, openNotification, currentUser, removeCurrentUser, contextHolder } = useContext(Auth)
 
     const fetchLogOut = async() => {
         const logout = await firebase.auth().signOut()
-        .catch(err => {
-            console.log(err)
-            return err
-        })
+        .catch(err => console.log(err))
         return logout
     }
         
@@ -29,36 +26,39 @@ const Navbar: React.FC = () => {
         })
     }
     
-
     let button;
     if (currentUser !== '') {
         button = (
-        <Space size='middle' style={{ float: 'right' }}>
-        <Cart/>
-        <Space>
-            <Avatar style={{ backgroundColor: '#ffbf00' }} size='small' icon={<UserOutlined />} />
-            <span>{currentUser}</span>
-        </Space>
-        <Button type='dashed' onClick={logout}>登出</Button>
-        </Space> 
+        <BtnWrapper>
+            <Space size='middle'>
+                <Cart/>
+                <DropMenu />      
+                <Button type='dashed' onClick={logout}>登出</Button>
+            </Space> 
+        </BtnWrapper>
         )
     } else {
         button = (
-            <Space size='middle' style={{ float: 'right' }}>
-            <Button type='dashed'><Link to='/login'>登入</Link></Button>
-            <Button type='primary'><Link to='/signup'>註冊</Link></Button>
-            </Space>
+            <BtnWrapper>
+                <Space size='middle'>
+                    <Button type='dashed'><Link to='/login'>登入</Link></Button>
+                    <Button type='primary'><Link to='/signup'>註冊</Link></Button>
+                </Space>
+            </BtnWrapper>
         )
     }
 
     return (
         <>
         {contextHolder}
-        <Logo className='logo'></Logo>
-        <Menu mode='horizontal' style={{ padding: '0 50px 0 100px' }}>
-                <Menu.Item key="1"><Link to='/'>Home</Link></Menu.Item>
-                <Menu.Item key="2"><Link to='/products'>Products</Link></Menu.Item>
-                <Menu.Item key="3"><Link to='/new'>New</Link></Menu.Item>
+        <Menu mode='horizontal'>
+                <Logo>
+                    <Link to='/'>
+                    <span><p>Void</p></span>
+                    </Link>
+                </Logo>
+                 <Menu.Item key="1"><Link to='/new'>NEW</Link></Menu.Item>
+                 <Menu.Item key="2"><Link to='/products'>COLLECTION</Link></Menu.Item>
                 {button}
         </Menu>
         </>

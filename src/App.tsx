@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { renderRoutes } from 'react-router-config';
 import routes from './route'
 import Navbar from './components/pages/navbar'
@@ -10,7 +10,7 @@ const App: React.FC = () => {
   const { Header, Content } = Layout
   return (
     <Layout style={{ background: '#fff', height: '100vh' }}>
-      <Header style={{ padding: 0, position: 'relative' }}>
+      <Header style={{ background: 'none', position: 'relative' }}>
          <Navbar />
       </Header>
       <Content>

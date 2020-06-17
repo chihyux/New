@@ -23,12 +23,12 @@ const Detail = () => {
         setCount(value)
     }
 
-    const AddCart = (product:any) => {
+    const AddCart = async(product:any) => {
         console.log('add Cart')
         const authUser = firebase.auth().currentUser
         if(authUser) {
             const id = product.id
-            const userOrdered = firebase.firestore().collection('cartList').doc(authUser.uid)
+            const userOrdered = await firebase.firestore().collection('cartList').doc(authUser.uid)
             .set({
                 ['userCart' + id]: {
                     ...product, 
@@ -36,7 +36,7 @@ const Detail = () => {
                     count: count
                 }
             },{ merge: true })
-            .then( err => console.log(err) )
+            .catch( err => console.log(err) )
             
             return userOrdered
         }

@@ -32,12 +32,6 @@ const routes: RouteConfig[] = [
             {
                 path:'/products',
                 component: Products,
-                routes: [
-                    {
-                        path:'/product/mars',
-                        component: Products
-                    }
-                ]
             },
             {
                 path:'/detail/:id',
@@ -46,12 +40,13 @@ const routes: RouteConfig[] = [
             {
                 path: '/new',
                 component: New,
-                routes: [
-                    {
-                        path:'/new/:id',
-                        component: Detail,
-                    }
-                ]
+            },
+            {
+                path: '/user/:id/ordered',
+                component: Loadable({
+                    loader: () => import('../src/components/user/index'),
+                    loading: ()=> <div>Loading...</div>
+                })
             },
             {
                 path:'/logIn',

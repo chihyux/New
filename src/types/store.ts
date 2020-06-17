@@ -14,22 +14,18 @@ export interface ProductContext {
 
 export type IProduct = {
     productList: Products[];
-    // orderList: OrderList[];
+    newProductList: Products[];
     // orderList: Set<any>;
 }
-
-// export type OrderList = {
-//     id: string;
-//     name: string;
-//     color: string;
-//     img: string;
-//     price: number;
-//     count: number;
-// }
 
 interface IGetProducts {
     type: 'GET_PRODUCTS';
     productList: Products[];
+}
+
+interface IGetNewProducts {
+    type: 'GET_NEWEST_PRODUCTS';
+    newProductList: Products[];
 }
 
 // interface ICartAdd {
@@ -38,13 +34,7 @@ interface IGetProducts {
 //     // orderList: OrderList;
 // }
 
-// interface ICartRemove {
-//     type: 'CART_REMOVE';
-//     orderList: Set<string>;
-//     // orderList: OrderList;
-// }
-
-export type ProductsAction = IGetProducts;
+export type ProductsAction = IGetProducts | IGetNewProducts;
 
 //
 export type Props = {
@@ -59,6 +49,7 @@ export interface IContext {
     contextHolder: React.ReactNode;
     openNotification: (placement:string) => void;
     removeCurrentUser: () => void;
+    uid: string;
 }
 
 export type IState = {

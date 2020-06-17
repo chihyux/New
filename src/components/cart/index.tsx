@@ -28,14 +28,14 @@ const Cart:React.FC = () => {
         }
     }, [])
 
-    const remove = (id:string) => {
+    const remove = async(id:string) => {
         console.log('remove from cart')
         if(authUser) {
-            const userCart = firebase.firestore().collection('cartList').doc(authUser.uid)
+            const userCart = await firebase.firestore().collection('cartList').doc(authUser.uid)
             .update({
                 ['userCart' + id]: firebase.firestore.FieldValue.delete()
             })
-            .then( err => console.log(err) )
+            .catch( err => console.log(err) )
             return userCart
         }
     }
@@ -48,23 +48,23 @@ const Cart:React.FC = () => {
         setVisible(!visible)
       }
     
-    const submit = (item: Array<string>) => {
+    const submit = async(item: Array<string>) => {
         const date = Date.now()
         if(authUser) {
-            const userOrdered = firebase.firestore().collection('ordered').doc(authUser.uid)
+            const userOrdered = await firebase.firestore().collection('ordered').doc(authUser.uid)
             .set({
                 [date]: {
-                List: [...item],
+                list: [...item],
                 id: date,
-                date: new Date(),
+                date: Date.now(),
                 status: 'pending'   
                 }
-            })  
+            },{ merge: true })  
             .then(() => {
                 firebase.firestore().collection('cartList').doc(authUser.uid).delete()
                 setCartList([])
             })
-            .then( err => console.log(err) )
+            .catch( err => console.log(err) )
             return userOrdered
         }
     }
