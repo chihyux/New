@@ -12,7 +12,7 @@ const ProductList = () => {
         <Row gutter={[16,32]}>
         {productList.map((product) => {
         return (
-             <Col xs={{ span: 12 }} sm={{ span: 8 }} md={{ span: 6 }} lg={{ span: 4 }} key={product.id}>
+             <Col xs={{ span: 12 }} sm={{ span: 8 }} md={{ span: 6 }} lg={{ span: 6 }} key={product.id}>
                 <Link to={'/detail/'+product.id} >
                 <ProductListCard
                 hoverable

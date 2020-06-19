@@ -4,13 +4,14 @@ import { ProductsStore } from '../../contexts/productContext'
 import { Row, Col, Select, Divider, InputNumber, Button } from 'antd'
 import { ProductDetail, ProductWrapper } from './Styled'
 import  firebase from '../../config/config'
+import { Auth } from 'contexts/authContext'
 
 const Detail = () => {
     const { state } = useContext(ProductsStore)
     const { productList } = state
     const [size, setSize] = useState('S')
     const [count, setCount] = useState(1)
-
+    const { uid, currentUser } = useContext(Auth)
     let { id } = useParams()
 
     const { Option } = Select;
@@ -25,10 +26,9 @@ const Detail = () => {
 
     const AddCart = async(product:any) => {
         console.log('add Cart')
-        const authUser = firebase.auth().currentUser
-        if(authUser) {
+        if(currentUser) {
             const id = product.id
-            const userOrdered = await firebase.firestore().collection('cartList').doc(authUser.uid)
+            const userOrdered = await firebase.firestore().collection('cartList').doc(uid)
             .set({
                 ['userCart' + id]: {
                     ...product, 

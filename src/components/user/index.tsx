@@ -1,6 +1,5 @@
 import React,{ useState, useEffect, useContext } from 'react'
-import { Button, Drawer, List, Skeleton } from 'antd';
-import { ShoppingCartOutlined } from '@ant-design/icons';
+import { List } from 'antd';
 import { Auth } from 'contexts/authContext';
 import firebase from '../../config/config'
 import { OrderedWrapper } from './Styled'
@@ -35,7 +34,6 @@ const User:React.FC = () => {
             <List.Item
                 key={item.id}
             >
-                <Skeleton avatar title={false} loading={item.loading} active>
                 <List.Item.Meta
                     title={item.name}
                     description={ 
@@ -57,7 +55,6 @@ const User:React.FC = () => {
                                 </div>
                                 }
                 />
-                </Skeleton>
             </List.Item>
             )}
         />

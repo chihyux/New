@@ -6,7 +6,6 @@ import swim from './image/photo-1467632499275-7a693a761056.jpg'
 import skirt from './image/photo-1584998316204-3b1e3b1895ae.jpg'
 import hat from './image/photo-1532347922424-c652d9b7208e.jpg'
 import { IndexWrapper } from './Styled'
-import { withTheme } from 'styled-components';
 
 const Fade = require('react-reveal/Fade');
 const LightSpeed = require('react-reveal/LightSpeed');

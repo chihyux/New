@@ -57,6 +57,7 @@ export const ProductsProvider:React.FC<{}> = ({ children }) => {
     })
     }, [])
 
+    
     const value = { state, dispatch }
     return (
         <ProductsStore.Provider value={value}>

@@ -9,6 +9,7 @@ import Nomatch from './components/pages/nomatch'
 import { Route, Switch, RouteProps } from 'react-router-dom'
 import Loadable from 'react-loadable';
 import React from 'react'
+import Loading from 'components/pages/loading'
 
 interface RouteConfig {
     component: RouteProps['component']
@@ -25,27 +26,36 @@ const routes: RouteConfig[] = [
                 path:'/',
                 component: Loadable({
                     loader: () => import('../src/components/home/index'),
-                    loading: () => <div>Loading...</div>
+                    loading: () => <Loading />
                 }),
                 exact: true
             },
             {
                 path:'/products',
-                component: Products,
+                component: Loadable({
+                    loader: () => import('../src/components/products/index'),
+                    loading: () => <Loading />
+                })
             },
             {
                 path:'/detail/:id',
-                component: Detail,
+                component: Loadable({
+                    loader: () => import('../src/components/products/productDetail'),
+                    loading: () => <Loading />
+                })
             },
             {
                 path: '/new',
-                component: New,
+                component: Loadable({
+                    loader: () => import('../src/components/new/index'),
+                    loading: () => <Loading />
+                })
             },
             {
                 path: '/user/:id/ordered',
                 component: Loadable({
                     loader: () => import('../src/components/user/index'),
-                    loading: ()=> <div>Loading...</div>
+                    loading: ()=> <Loading />
                 })
             },
             {

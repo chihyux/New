@@ -33,3 +33,13 @@ export const MenuInnerWrapper = styled.div`
     font-size: 12px;
   }
 `
+
+//spin
+export const SpingWrapper = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+`

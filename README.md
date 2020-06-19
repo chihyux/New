@@ -1,13 +1,19 @@
 # Shopping cart
-demo shopping websit by using React Hooks / Context / Reducer.
-database: firebase Cloud Firestore
-framework: ant design
+demo shopping websit by using React Hooks / Context / Reducer.  
+database: firebase Cloud Firestore  
+framework: ant design  
 
-1. firebase authentication
-users authenticate with Firebase using their email addresses and passwords
-users authenticate with Google Accounts by integrating Google Sign-In
+1. firebase authentication  
+users authenticate with Firebase using their email addresses and passwords  
+users authenticate with Google Accounts by integrating Google Sign-In  
 
-2. router redirect
+2. router redirect  
+
+## User Story  
+1. new: filter latest 1 month products  
+2. select productss and add to cart  
+3. remove item from cart  
+4. submit your shopping list  
 
 
 ## Installing

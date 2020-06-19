@@ -1,20 +1,19 @@
-import React,{ useState, useEffect } from 'react'
-import { Button, Drawer, List, Skeleton } from 'antd';
+import React,{ useState, useEffect, useContext } from 'react'
+import { Button, Drawer, List} from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import firebase from '../../config/config'
-import { firestore } from 'firebase';
+import { Auth } from 'contexts/authContext';
 
 const Cart:React.FC = () => {
     const [visible, setVisible] = useState(false)
     const [cartList, setCartList] = useState([] as any)
-
-    const authUser = firebase.auth().currentUser
+    const { uid } = useContext(Auth)
 
     useEffect(() => {
-        if(authUser) {
+        if(uid) {
         const unsubscribe = firebase.firestore()
         .collection('cartList')
-        .doc(authUser.uid)
+        .doc(uid)
         .onSnapshot((doc) => {
           const cartList = doc.data()
           console.log(cartList)
@@ -30,8 +29,8 @@ const Cart:React.FC = () => {
 
     const remove = async(id:string) => {
         console.log('remove from cart')
-        if(authUser) {
-            const userCart = await firebase.firestore().collection('cartList').doc(authUser.uid)
+        if(uid) {
+            const userCart = await firebase.firestore().collection('cartList').doc(uid)
             .update({
                 ['userCart' + id]: firebase.firestore.FieldValue.delete()
             })
@@ -50,8 +49,8 @@ const Cart:React.FC = () => {
     
     const submit = async(item: Array<string>) => {
         const date = Date.now()
-        if(authUser) {
-            const userOrdered = await firebase.firestore().collection('ordered').doc(authUser.uid)
+        if(uid) {
+            const userOrdered = await firebase.firestore().collection('ordered').doc(uid)
             .set({
                 [date]: {
                 list: [...item],
@@ -61,7 +60,7 @@ const Cart:React.FC = () => {
                 }
             },{ merge: true })  
             .then(() => {
-                firebase.firestore().collection('cartList').doc(authUser.uid).delete()
+                firebase.firestore().collection('cartList').doc(uid).delete()
                 setCartList([])
             })
             .catch( err => console.log(err) )
@@ -99,7 +98,6 @@ const Cart:React.FC = () => {
                 actions={[<a key="list-remove" onClick={()=> remove(item.id)}>刪除</a>]}
                 key={item.id}
             >
-                <Skeleton avatar title={false} loading={item.loading} active>
                 <List.Item.Meta
                     title={item.name}
                     description={ <div className='cart-detail' style={{ display: 'flex'}}>
@@ -114,7 +112,6 @@ const Cart:React.FC = () => {
                                   </div>
                                 }
                 />
-                </Skeleton>
             </List.Item>
             )}
         />

@@ -1,4 +1,4 @@
-import React,{ useState, useEffect, useContext } from 'react'
+import React,{ useContext } from 'react'
 import { Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
 import { ProductListCard, ListDetail } from '../products/Styled'
@@ -12,7 +12,7 @@ const NewProductList = () => {
         <Row gutter={[16,32]}>
         {newProductList.map((product) => {
         return (
-             <Col xs={{ span: 12 }} sm={{ span: 8 }} md={{ span: 6 }} lg={{ span: 4 }} key={product.id}>
+             <Col xs={{ span: 12 }} sm={{ span: 8 }} md={{ span: 6 }} lg={{ span: 6 }} key={product.id}>
                 <Link to={'/detail/'+product.id} >
                 <ProductListCard
                 hoverable

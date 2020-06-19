@@ -16,6 +16,7 @@ export const AuthProvider:React.FC<{}> = ({ children }) => {
     const [api, contextHolder] = notification.useNotification();
     const [currentUser, setCurrentUser] = useState<string>('')
     const [uid, setUid] = useState('')
+
     useEffect(() => {
         console.log('update')
         findCurrentUser()
