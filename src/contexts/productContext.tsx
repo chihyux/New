@@ -1,4 +1,4 @@
-import React, { createContext, Context, useState, useReducer, useEffect } from 'react'
+import React, { createContext, useReducer, useEffect } from 'react'
 import { firebaseProducts } from '../reducer/productsReducer'
 import { Products, ProductContext, IProduct } from '../types/store'
 import firebase from '../config/config'

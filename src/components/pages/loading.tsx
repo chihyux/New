@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spin, Space } from 'antd';
+import { Spin } from 'antd';
 import { SpingWrapper } from './Styled'
 
 const Loading = () => {

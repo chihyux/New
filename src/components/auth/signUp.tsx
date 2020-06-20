@@ -11,9 +11,9 @@ const SignUp:React.FC = () => {
     const [password, setPassword] = useState('')
     const [routeRedirect, setRouteRedirect] = useState(false)
 
-    const {state, dispatch, openNotification, contextHolder, currentUser} = useContext(Auth)
+    const { dispatch, openNotification, currentUser} = useContext(Auth)
 
-    if(currentUser !== '') return <Redirect to="/" />;
+    if(currentUser !== '') return <Redirect to="/" />
     if(routeRedirect) return <Redirect to='/' />
 
     const postSignUp = async (email:string, password:string) => {
@@ -44,7 +44,6 @@ const SignUp:React.FC = () => {
 
     return (
           <AuthWrapper>
-          {contextHolder}
           <h5>註冊帳號</h5>
           <Form
               name='signup-form'

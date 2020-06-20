@@ -1,4 +1,4 @@
-import React,{ useState, useEffect, useContext } from 'react'
+import React,{ useState, useContext,useEffect, useCallback } from 'react'
 import { Button, Drawer, List} from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import firebase from '../../config/config'
@@ -9,27 +9,9 @@ const Cart:React.FC = () => {
     const [cartList, setCartList] = useState([] as any)
     const { uid } = useContext(Auth)
 
-    useEffect(() => {
-        if(uid) {
-        const unsubscribe = firebase.firestore()
-        .collection('cartList')
-        .doc(uid)
-        .onSnapshot((doc) => {
-          const cartList = doc.data()
-          console.log(cartList)
-          if(cartList) {
-              const getList: string[] = [...Object.values(cartList)]
-              setCartList(getList)
-          }
-        })
-    
-        return () => unsubscribe()
-        }
-    }, [])
-
     const remove = async(id:string) => {
         console.log('remove from cart')
-        if(uid) {
+        if(uid !== '') {
             const userCart = await firebase.firestore().collection('cartList').doc(uid)
             .update({
                 ['userCart' + id]: firebase.firestore.FieldValue.delete()
@@ -41,6 +23,20 @@ const Cart:React.FC = () => {
 
     const showDrawer = () => {
         setVisible(!visible)
+        if(uid) {
+        const unsubscribe = firebase.firestore()
+        .collection('cartList')
+        .doc(uid)
+        .onSnapshot((doc) => {
+          const cartList = doc.data()
+          if(cartList) {
+              const getList: string[] = [...Object.values(cartList)]
+              setCartList(getList)
+          }
+        })
+
+        return () => unsubscribe() 
+        }
       }
     
     const onClose = () => {
@@ -49,7 +45,7 @@ const Cart:React.FC = () => {
     
     const submit = async(item: Array<string>) => {
         const date = Date.now()
-        if(uid) {
+        if(uid !== '') {
             const userOrdered = await firebase.firestore().collection('ordered').doc(uid)
             .set({
                 [date]: {
@@ -95,7 +91,7 @@ const Cart:React.FC = () => {
         dataSource={cartList}
         renderItem={(item:any) => (
             <List.Item
-                actions={[<a key="list-remove" onClick={()=> remove(item.id)}>刪除</a>]}
+                actions={[<button key="list-remove" onClick={()=> remove(item.id)}>刪除</button>]}
                 key={item.id}
             >
                 <List.Item.Meta

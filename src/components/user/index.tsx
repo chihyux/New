@@ -1,30 +1,32 @@
-import React,{ useState, useEffect, useContext } from 'react'
+import React,{ useState, useEffect, useCallback } from 'react'
 import { List } from 'antd';
-import { Auth } from 'contexts/authContext';
 import firebase from '../../config/config'
 import { OrderedWrapper } from './Styled'
 
 const User:React.FC = () => {
-    const { uid } = useContext(Auth)
     const [orderedList, setOrderedList] = useState([] as any)
 
+    const fetchingData = useCallback(
+        () => {
+            const user = firebase.auth().currentUser
+            if(user) {
+                const unsubscribe = firebase.firestore()
+                .collection('ordered')
+                .doc(user.uid)
+                .onSnapshot((doc) => {
+                  const orderedList = doc.data()
+                  if(orderedList) {
+                      const getList: any[] = [...Object.values(orderedList)]
+                    setOrderedList(getList)
+                  }
+                })
+                return () => unsubscribe()
+            }
+        },[])
+
     useEffect(() => {
-        if(uid) {
-        const unsubscribe = firebase.firestore()
-        .collection('ordered')
-        .doc(uid)
-        .onSnapshot((doc) => {
-          const orderedList = doc.data()
-          console.log(orderedList)
-          if(orderedList) {
-              const getList: any[] = [...Object.values(orderedList)]
-            setOrderedList(getList)
-          }
-        })
-    
-        return () => unsubscribe()
-        }
-    }, [])
+        fetchingData()
+    }, [fetchingData])
 
     const cartDetail = (
         <List
@@ -42,8 +44,7 @@ const User:React.FC = () => {
                                         <span>下單時間: {new Date(item.date).toString()}</span>
                                         {item.list.map((listItem:any) => {
                                            return (
-                                            <>
-                                            
+                                            <>          
                                             <span className='ordered-name'>{listItem.name}</span>
                                             <span>顏色: {listItem.color}</span>
                                             <span>尺寸: {listItem.size}</span>

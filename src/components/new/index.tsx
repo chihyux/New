@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import firebase from '../../config/config'
-import { Products } from '../../types/store'
+import React from 'react'
 import NewProductList from './newProductList'
 import { ProductListWrapper } from '../products/Styled'
 

@@ -14,10 +14,6 @@ export const firebaseProducts = (state: IProduct, action: ProductsAction ) => {
         //     console.log(action);
         //     return {...state, orderList: new Set([...Array.from(state.orderList), action.orderList]) }
 
-        // case 'CART_REMOVE':
-        //     console.log(action);
-        //     return {...state, orderList: new Set([...Array.from(state.orderList), action.orderList]) }
-
         default:
             return state;
     }

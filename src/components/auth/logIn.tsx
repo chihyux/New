@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import firebase from '../../config/config'
 import { Auth } from '../../contexts/authContext'
@@ -15,7 +15,7 @@ const LogIn:React.FC = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [routeRedirect, setRouteRedirect] = useState(false)
-    const {state, dispatch, openNotification, contextHolder, currentUser} = useContext(Auth)
+    const { dispatch, openNotification, currentUser } = useContext(Auth)
 
     if(currentUser !== '') return <Redirect to="/" />
     if(routeRedirect) return <Redirect to='/' />
@@ -77,7 +77,6 @@ const LogIn:React.FC = () => {
 
     return (
         <AuthWrapper>
-            {contextHolder}
             <h5>登入帳號</h5>
             <Form
                 name='login-form'

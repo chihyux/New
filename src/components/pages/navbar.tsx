@@ -8,7 +8,7 @@ import Cart from '../cart/index'
 import DropMenu from './dropMenu'
 
 const Navbar: React.FC = () => {
-    const{state, dispatch, openNotification, currentUser, removeCurrentUser, contextHolder } = useContext(Auth)
+    const{ dispatch, openNotification, currentUser, removeCurrentUser, contextHolder } = useContext(Auth)
 
     const fetchLogOut = async() => {
         const logout = await firebase.auth().signOut()

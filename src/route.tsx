@@ -1,12 +1,7 @@
-import Home from './components/home/index'
-import New from './components/new/index'
-import Products from './components/products/index'
-// import { RouteConfig } from '../node_modules/@types/react-router-config/index'
-import Detail from 'components/products/productDetail'
 import SignUp from 'components/auth/signUp'
 import LogIn from 'components/auth/logIn'
 import Nomatch from './components/pages/nomatch'
-import { Route, Switch, RouteProps } from 'react-router-dom'
+import { RouteProps } from 'react-router-dom'
 import Loadable from 'react-loadable';
 import React from 'react'
 import Loading from 'components/pages/loading'

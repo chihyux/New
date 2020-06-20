@@ -1,4 +1,4 @@
-import React, { createContext, Context, useState, useReducer, useEffect } from 'react'
+import React, { createContext, useState, useReducer, useEffect } from 'react'
 import { firebaseAuth } from '../reducer/authReducer'
 import { IContext, IState } from '../types/store'
 import firebase from '../config/config'
@@ -15,7 +15,7 @@ export const AuthProvider:React.FC<{}> = ({ children }) => {
     const [state, dispatch] = useReducer(firebaseAuth, initialState)
     const [api, contextHolder] = notification.useNotification();
     const [currentUser, setCurrentUser] = useState<string>('')
-    const [uid, setUid] = useState('')
+    const [uid, setUid] = useState<string>('')
 
     useEffect(() => {
         console.log('update')
@@ -48,7 +48,7 @@ export const AuthProvider:React.FC<{}> = ({ children }) => {
       });
     };
 
-    const value = { state, dispatch, openNotification, contextHolder, currentUser,removeCurrentUser, uid}
+    const value = { state, dispatch, openNotification, contextHolder, currentUser,removeCurrentUser, uid }
     return (
         <Auth.Provider value={value}>
             {children}
