@@ -7,10 +7,10 @@ import { Auth } from 'contexts/authContext';
 const Cart:React.FC = () => {
     const [visible, setVisible] = useState(false)
     const [cartList, setCartList] = useState([] as any)
-    const { uid } = useContext(Auth)
+    const { uid, currentUser } = useContext(Auth)
 
     const remove = async(id:string) => {
-        if(uid) {
+        if(currentUser) {
             const userCart = await firebase.firestore().collection('cartList').doc(uid)
             .update({
                 ['userCart' + id]: firebase.firestore.FieldValue.delete()
@@ -22,7 +22,7 @@ const Cart:React.FC = () => {
 
     const showDrawer = () => {
         setVisible(!visible)
-        if(uid) {
+        if(currentUser) {
         const unsubscribe = firebase.firestore()
         .collection('cartList')
         .doc(uid)
@@ -44,7 +44,7 @@ const Cart:React.FC = () => {
     
     const submit = async(item: Array<string>) => {
         const date = Date.now()
-        if(uid) {
+        if(currentUser) {
             const userOrdered = await firebase.firestore().collection('ordered').doc(uid)
             .set({
                 [date]: {

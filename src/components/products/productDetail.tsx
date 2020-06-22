@@ -12,7 +12,7 @@ const Detail = () => {
     const { productList } = state
     const [size, setSize] = useState('S')
     const [count, setCount] = useState(1)
-    const { uid } = useContext(Auth)
+    const { uid, currentUser } = useContext(Auth)
     const [routeRedirect, setRouteRedirect] = useState(false)
 
     let { id } = useParams()
@@ -29,7 +29,7 @@ const Detail = () => {
     }
 
     const AddCart = async(product:any) => {
-        if (uid){
+        if (currentUser){
             console.log('add Cart')
             const id = product.id
             const userOrdered = await firebase.firestore().collection('cartList').doc(uid)
@@ -43,6 +43,7 @@ const Detail = () => {
             .catch( err => console.log(err) )
             return userOrdered
         } else {
+            console.log('not user')
            setRouteRedirect(true)
         }
     }
