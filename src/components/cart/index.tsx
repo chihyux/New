@@ -1,4 +1,4 @@
-import React,{ useState, useContext,useEffect, useCallback } from 'react'
+import React,{ useState, useContext } from 'react'
 import { Button, Drawer, List} from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import firebase from '../../config/config'
@@ -10,8 +10,7 @@ const Cart:React.FC = () => {
     const { uid } = useContext(Auth)
 
     const remove = async(id:string) => {
-        console.log('remove from cart')
-        if(uid !== '') {
+        if(uid) {
             const userCart = await firebase.firestore().collection('cartList').doc(uid)
             .update({
                 ['userCart' + id]: firebase.firestore.FieldValue.delete()
@@ -45,7 +44,7 @@ const Cart:React.FC = () => {
     
     const submit = async(item: Array<string>) => {
         const date = Date.now()
-        if(uid !== '') {
+        if(uid) {
             const userOrdered = await firebase.firestore().collection('ordered').doc(uid)
             .set({
                 [date]: {
@@ -113,6 +112,7 @@ const Cart:React.FC = () => {
         />
        </ Drawer>
     )
+    
     return (
         <>
         <Button type='primary' 
