@@ -51,7 +51,7 @@ export const AuthWrapper = styled.div`
     width: 350px;
     margin: 0 auto;
     position: relative;
-    top: 20%;
+    top: 30%;
     transform: translateY(-30%);
     border: 1px solid #eee;
     padding: 2em 3em;
@@ -61,6 +61,9 @@ export const AuthWrapper = styled.div`
       text-align: center;
       font-weight: bold;
       letter-spacing: 10px;
+    }
+    @media(max-width:580px) {
+      width: 80%;
     }
 `
 export const AuthBtn =  styled.div`
