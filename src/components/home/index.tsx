@@ -38,7 +38,7 @@ const Home = () => {
                     <span>/20SS </span>
                     <span>JUNE</span>
                 </div>
-                <img src={skirt} alt='Summer Sky' style={{ width: '28em'}} />
+                <img src={skirt} alt='Summer Sky' style={{ width: '85%'}} />
                 </div>
                 </Fade>
             </Col>
@@ -49,16 +49,16 @@ const Home = () => {
             </Col>
             </Row>
             <Row gutter={[0, 56]} style={{ background: '#fff', margin: '30em 0 0 0', padding: '7em 0'}}>
-                <Col span={6} offset={4}>
+                <Col span={12} offset={4}>
                     <Fade>
-                    <img src={swim} alt='Summer' style={{ width: '28em'}} />
+                    <img src={swim} alt='Summer' style={{ width: '85%'}} />
                     </Fade>
                 </Col>
-                <Col span={10}>
+                <Col span={8}>
                     <Fade right cascade>
                     <div>
                     <span className='sunshine'>SUNSHINE</span>
-                    <img src={hat} alt='Summer' style={{ width: '40%', position: 'absolute', bottom: '6em', right: '2em' }} />
+                    <img src={hat} alt='Summer' style={{ width: '65%', position: 'absolute', bottom: '6em', right: '4em' }} />
                     </div>
                     </Fade>
                 </Col>

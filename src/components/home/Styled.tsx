@@ -3,12 +3,16 @@ import styled from 'styled-components'
 export const IndexWrapper = styled.div`
     margin: 3em auto;
     text-align: center;
+    overflow: hidden;
     span {
         font-size: 6em;
         font-family: 'Caveat',cursive;
         color: #d6d5b9;
         text-align: left;
         white-space: nowrap;
+        @media(max-width: 580px) {
+            font-size: 2em;
+        }
     }
     .days {
         position: relative;
@@ -17,6 +21,12 @@ export const IndexWrapper = styled.div`
         display: flex;
         flex-direction: column;
         top: 0;
+        @media(max-width: 1440px) {
+            left: 8em;
+        }
+        @media(max-width: 1280px) {
+            left: 0;
+        }
     }
     .june {
         position: relative;
@@ -39,6 +49,9 @@ export const IndexWrapper = styled.div`
             border-bottom: 5px solid #d6d5b9;
             font-size: 4em;
             color: #806638;
+            @media(max-width: 580px) {
+                font-size: 2em;
+            }
         }
     }
     .sunshine {
