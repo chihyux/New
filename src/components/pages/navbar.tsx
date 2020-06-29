@@ -6,7 +6,6 @@ import { Menu, Button, Space } from 'antd'
 import { Logo, BtnWrapper } from './Styled'
 import Cart from '../cart/index'
 import DropMenu from './dropMenu'
-import logo from '../../../public/logo.png'
 
 const Navbar: React.FC = () => {
     const{ dispatch, openNotification, currentUser, removeCurrentUser, contextHolder } = useContext(Auth)
