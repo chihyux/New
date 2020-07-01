@@ -13,7 +13,10 @@ const App: React.FC = () => {
       <Header style={{ background: 'none', position: 'relative' }}>
          <Navbar />
       </Header>
-      <Content>
+      <Content style={{ width: '100%',
+    height: '100%',
+    maxWidth: '100%',
+    maxHeight: '100%' }}>
          { renderRoutes(routes) }
       </Content>
     </Layout>
