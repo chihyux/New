@@ -51,8 +51,8 @@ export const AuthWrapper = styled.div`
     width: 350px;
     margin: 0 auto;
     position: relative;
-    top: 30%;
-    transform: translateY(-30%);
+    top: 50%;
+    transform: translateY(-50%);
     border: 1px solid #eee;
     padding: 2em 3em;
     box-shadow: 0px 1px 6px 2px rgba(208, 205, 205, 0.3);
