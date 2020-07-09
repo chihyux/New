@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useParams, Redirect } from 'react-router-dom'
 import { ProductsStore } from '../../contexts/productContext'
-import { Row, Col, Select, Divider, InputNumber, Button } from 'antd'
+import { Row, Col, Select, Divider, InputNumber, Button, Modal } from 'antd'
 import { ProductDetail, ProductWrapper } from './Styled'
 import  firebase from '../../config/config'
 import { Auth } from 'contexts/authContext'
@@ -30,7 +30,10 @@ const Detail = () => {
 
     const AddCart = async(product:any) => {
         if (currentUser){
-            console.log('add Cart')
+            Modal.success({
+                title: '已加入購物車',
+                content: `快去結帳吧!!`,
+            });
             const id = product.id
             const userOrdered = await firebase.firestore().collection('cartList').doc(uid)
             .set({
