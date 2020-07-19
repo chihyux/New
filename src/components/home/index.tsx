@@ -14,7 +14,7 @@ const Home = () => {
     
     return (
         <IndexWrapper>
-            <Row gutter={[0, 56]} align='middle' style={{ background: '#fff' }}>
+            <Row gutter={[0, 56]} align='middle'>
             <Col span={6} offset={5}>
                 <LightSpeed left cascade>
                 <div className='days'>

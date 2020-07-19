@@ -19,14 +19,13 @@ const SignUp:React.FC = () => {
     const postSignUp = async (email:string, password:string) => {
         const user = await firebase.auth().createUserWithEmailAndPassword(email,password)
         .catch(err => {
-        console.log('post err', err.messsage)
         openNotification('Sign Up')
         return dispatch({
             type: 'SIGNUP_ERROR',
             payload: err.message
         })
         })
-    return user
+        return user
   }
     const signup = async() => {
         let res = await postSignUp(email, password)

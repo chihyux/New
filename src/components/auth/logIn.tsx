@@ -20,11 +20,7 @@ const LogIn:React.FC = () => {
     if(currentUser !== '') return <Redirect to="/" />
     if(routeRedirect) return <Redirect to='/' />
 
-    const fetchLogin = async(email:string, password:string) => {
-        // const user = await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-        // .then(()=> {
-        //     return firebase.auth().signInWithEmailAndPassword(email,password)
-        // })
+    const fetchLogin = (email:string, password:string) => {
         const user = firebase.auth().signInWithEmailAndPassword(email,password)
         .catch(err => {
         openNotification('Login')
@@ -37,10 +33,8 @@ const LogIn:React.FC = () => {
     }
 
     const login = async() => {
-        // e.preventDefault()
         setEmail('')
         setPassword('')
-        console.log('form sent')
         let res = await fetchLogin(email,password)
         if(res) {
             setRouteRedirect(true)
@@ -56,8 +50,8 @@ const LogIn:React.FC = () => {
         e.preventDefault()
         const provider = new firebase.auth.GoogleAuthProvider()
         firebase.auth().useDeviceLanguage()
-        firebase.auth().signInWithPopup(provider).then((result)=> {
-            console.log('this result',result)
+        firebase.auth().signInWithPopup(provider)
+        .then((result)=> {
             if(result.user)
             dispatch({ 
                 type: 'GOOGLE_LOGIN_SUCCESS',

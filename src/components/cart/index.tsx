@@ -15,7 +15,6 @@ const Cart:React.FC = () => {
             .update({
                 ['userCart' + id]: firebase.firestore.FieldValue.delete()
             })
-            .catch( err => console.log(err) )
             return userCart
         }
     }
