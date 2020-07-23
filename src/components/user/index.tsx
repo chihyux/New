@@ -2,9 +2,10 @@ import React,{ useState, useEffect, useCallback } from 'react'
 import { List } from 'antd';
 import firebase from '../../config/config'
 import { OrderedWrapper } from './Styled'
+import { OrderList, Products, ListItem } from '../../types/store'
 
 const User:React.FC = () => {
-    const [orderedList, setOrderedList] = useState([] as any)
+    const [orderedList, setOrderedList] = useState<OrderList>([])
 
     const fetchingData = useCallback(
         () => {
@@ -16,7 +17,7 @@ const User:React.FC = () => {
                 .onSnapshot((doc) => {
                   const orderedList = doc.data()
                   if(orderedList) {
-                      const getList: any[] = [...Object.values(orderedList)]
+                      const getList: OrderList = [...Object.values(orderedList)]
                     setOrderedList(getList)
                   }
                 })
@@ -32,7 +33,7 @@ const User:React.FC = () => {
         <List
         itemLayout="horizontal"
         dataSource={orderedList}
-        renderItem={(item:any) => (
+        renderItem={(item:Products) => (
             <List.Item
                 key={item.id}
             >
@@ -42,7 +43,7 @@ const User:React.FC = () => {
                                 <div style={{ display: 'flex', flexDirection: 'column', width: '95%' }}>
                                         <span className='ordered-id'>訂單編號: {item.id}</span>
                                         <span>下單時間: {new Date(item.date).toString()}</span>
-                                        {item.list.map((listItem:any) => {
+                                        {item.list?.map((listItem:ListItem) => {
                                            return (
                                             <>          
                                             <span className='ordered-name'>{listItem.name}</span>

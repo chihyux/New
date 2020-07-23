@@ -7,8 +7,8 @@ import { notification } from 'antd';
 export const Auth = createContext({} as IContext)
 
 const initialState:IState = {
-    user: null,
-    authMessage: null
+    user: '',
+    authMessage: ''
 }
 
 export const AuthProvider:React.FC<{}> = ({ children }) => {
@@ -18,12 +18,11 @@ export const AuthProvider:React.FC<{}> = ({ children }) => {
     const [uid, setUid] = useState<string>('')
 
     useEffect(() => {
-        console.log('update')
         findCurrentUser()
-    }, [])
+    }, [uid])
 
     const findCurrentUser = () => {
-        firebase.auth().onAuthStateChanged(function(user:any) {
+        firebase.auth().onAuthStateChanged((user:any) => {
             if(user) {
                setCurrentUser(user.email)
                setUid(user.uid)
@@ -50,7 +49,7 @@ export const AuthProvider:React.FC<{}> = ({ children }) => {
 
     const value = { state, dispatch, openNotification, contextHolder, currentUser,removeCurrentUser, uid }
     return (
-        <Auth.Provider value={value}>
+        <Auth.Provider value={value as IContext}>
             {children}
         </Auth.Provider>
     )

@@ -20,15 +20,15 @@ const Detail = () => {
 
     if(routeRedirect) return <Redirect to='/login' />
 
-    function handleChange(value:string) {
+    function handleChangeSize (value:string) {
         setSize(value)
     }
     
-    function onChange(value:any) {
-        setCount(value)
+    function handleChangeCount (value:any) {
+          setCount(value)  
     }
 
-    const AddCart = async(product:any) => {
+    const AddCart = async(product:Products) => {
         if (currentUser){
             Modal.success({
                 title: '已加入購物車',
@@ -50,7 +50,7 @@ const Detail = () => {
            setRouteRedirect(true)
         }
     }
-
+    
     return (
         <ProductWrapper>
         {productList.filter((item:Products) => id === item.id)
@@ -67,12 +67,15 @@ const Detail = () => {
                     <div className='details name'>{item.name}</div>
                     <div className='details color'>{item.color}</div>
                     <div className='details option'>
-                    <Select defaultValue='S' style={{ width: 120 }} onChange={handleChange}>
+                    <Select defaultValue='S' style={{ width: 120 }} onChange={handleChangeSize}>
                         <Option value={item.size[0]}>{item.size[0]}</Option> 
                         <Option value={item.size[1]}>{item.size[1]}</Option> 
                         <Option value={item.size[2]}>{item.size[2]}</Option> 
                     </Select>
-                    <InputNumber min={1} max={5} defaultValue={1} onChange={onChange} />
+                    <InputNumber min={1} max={1000} defaultValue={1} 
+                                formatter={value => `${value}`}
+                                parser={value => value? value.replace(/[^1-9]/g,'') : "1"}
+                                onChange={handleChangeCount} />
                     </div>
                     <span>NT.$ {item.price}</span>  
                     <Divider />

@@ -5,18 +5,32 @@ export type Products = {
     img: string;
     price: number;
     size: Array<string>;
+    count?: number;
+    date?: any;
+    list?: ListItem[];
+    status?: string;
 }
 
 export interface ProductContext {
     state: IProduct;
-    dispatch: any;
+    dispatch: ({type}: {type:string}) => void;
 }
 
 export type IProduct = {
     productList: Products[];
     newProductList: Products[];
-    // orderList: Set<any>;
 }
+
+export type CartList = Products[];
+export type OrderList = Products[];
+
+export type ListItem = {
+    color: string;
+    size: string;
+    count: number;
+    name: string;
+}
+
 
 interface IGetProducts {
     type: 'GET_PRODUCTS';
@@ -28,12 +42,6 @@ interface IGetNewProducts {
     newProductList: Products[];
 }
 
-// interface ICartAdd {
-//     type: 'CART_ADD';
-//     orderList: Set<string>;
-//     // orderList: OrderList;
-// }
-
 export type ProductsAction = IGetProducts | IGetNewProducts;
 
 //
@@ -43,7 +51,6 @@ export type Props = {
 
 export interface IContext {
     state: IState;
-    // dispatch?: ({type}: {type:string}) => void;
     dispatch: any;
     currentUser: string;
     contextHolder: React.ReactNode;
@@ -53,45 +60,43 @@ export interface IContext {
 }
 
 export type IState = {
-    authMessage: string | null;
-    user: string | null;
+    authMessage: string;
+    user: string;
 }
 
 interface ILoginSuccess {
     type: 'LOGIN_SUCCESS';
-    value: any;
+    payload: IState;
 }
 
 interface ILoginError {
     type: 'LOGIN_ERROR';
-    value: any;
+    payload: IState;
 }
 
 interface ISignUpSuccess {
     type: 'SIGNUP_SUCCESS';
-    value: any;
+    payload: IState;
 }
 
 interface ISignUpError {
     type: 'SIGNUP_ERROR';
-    value: any;
+    payload: IState;
 }
 
-interface IGLS {
+interface IGoogleLoginSuccess {
     type: 'GOOGLE_LOGIN_SUCCESS';
-    value: any;
+    payload: IState;
 }
 
-interface IGLE {
+interface IGoogleLoginError {
     type: 'GOOGLE_LOGIN_ERROR';
-    value: any;
+    payload: IState;
 }
 
 interface ILogOutSuccess {
     type: 'LOGOUT_SUCCESS';
-    value: any;
+    payload: IState;
 }
 
-export type Actions = ILoginSuccess | ILoginError | ISignUpSuccess | ISignUpError | IGLS | IGLE | ILogOutSuccess;
-
-
+export type AuthActions = ILoginSuccess | ILoginError | ISignUpSuccess | ISignUpError | IGoogleLoginSuccess | IGoogleLoginError | ILogOutSuccess;

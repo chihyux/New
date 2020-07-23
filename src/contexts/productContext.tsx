@@ -5,7 +5,6 @@ import firebase from '../config/config'
 
 const productList: Array<Products> = []
 const newProductList: Array<Products> = []
-// const orderList:Set<string> = new Set([])
 
 export const ProductsStore = createContext({} as ProductContext)
 
@@ -15,7 +14,7 @@ const defaultContext:IProduct = {
 }
 
 export const ProductsProvider:React.FC<{}> = ({ children }) => {
-    const [state, dispatch] = useReducer(firebaseProducts, defaultContext as any )
+    const [state, dispatch] = useReducer(firebaseProducts, defaultContext as IProduct )
 
     useEffect(() => {
         firebase.firestore().collection('products').get()
@@ -46,7 +45,6 @@ export const ProductsProvider:React.FC<{}> = ({ children }) => {
         .where('update','<=',nowMonthEndDay)
         .get()
         .then((querySnapshot:any) => {
-        console.log('New...')
         let newProducts:Products[] = []
         querySnapshot.forEach((doc:any) => {
         newProducts.push({
@@ -60,7 +58,7 @@ export const ProductsProvider:React.FC<{}> = ({ children }) => {
     
     const value = { state, dispatch }
     return (
-        <ProductsStore.Provider value={value}>
+        <ProductsStore.Provider value={value as ProductContext}>
             {children}
         </ProductsStore.Provider>
     )

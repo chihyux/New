@@ -46,7 +46,7 @@ const LogIn:React.FC = () => {
         } 
     }
 
-    const googleLogin = (e?:any) => {
+    const googleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         const provider = new firebase.auth.GoogleAuthProvider()
         firebase.auth().useDeviceLanguage()
@@ -59,10 +59,9 @@ const LogIn:React.FC = () => {
             })
             openNotification('Login')
         }).catch( err => {
-            const errorMessage = err.message;
             dispatch({ 
             type: 'GOOGLE_LOGIN_ERROR',
-            payload: errorMessage
+            payload: err.message
         })
         })
         

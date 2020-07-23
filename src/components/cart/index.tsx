@@ -3,10 +3,11 @@ import { Button, Drawer, List} from 'antd';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import firebase from '../../config/config'
 import { Auth } from 'contexts/authContext';
+import { CartList, Products } from '../../types/store'
 
 const Cart:React.FC = () => {
     const [visible, setVisible] = useState(false)
-    const [cartList, setCartList] = useState([] as any)
+    const [cartList, setCartList] = useState<CartList>([])
     const { uid, currentUser } = useContext(Auth)
 
     const remove = async(id:string) => {
@@ -28,7 +29,7 @@ const Cart:React.FC = () => {
         .onSnapshot((doc) => {
           const cartList = doc.data()
           if(cartList) {
-              const getList: string[] = [...Object.values(cartList)]
+              const getList: CartList = [...Object.values(cartList)]
               setCartList(getList)
           }
         })
@@ -41,7 +42,7 @@ const Cart:React.FC = () => {
         setVisible(!visible)
       }
     
-    const submit = async(item: Array<string>) => {
+    const submit = async(item: CartList) => {
         const date = Date.now()
         if(currentUser) {
             const userOrdered = await firebase.firestore().collection('ordered').doc(uid)
@@ -87,7 +88,7 @@ const Cart:React.FC = () => {
         <List
         itemLayout="horizontal"
         dataSource={cartList}
-        renderItem={(item:any) => (
+        renderItem={(item: Products) => (
             <List.Item
                 actions={[<button key="list-remove" onClick={()=> remove(item.id)}>刪除</button>]}
                 key={item.id}
