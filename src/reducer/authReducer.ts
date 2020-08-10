@@ -1,4 +1,4 @@
-import { AuthActions, IState } from '../types/store'
+import { IState } from '../types/store'
 
 export const firebaseAuth = (state: IState, action: any) => {
     switch(action.type) {
