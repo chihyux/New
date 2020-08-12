@@ -1,5 +1,5 @@
 # Shopping cart
-demo shopping websit by using React Hooks / Context / Reducer.  
+by using React Hooks / Context / Reducer.  
 database: firebase Cloud Firestore  
 framework: ant design  
 
@@ -11,9 +11,10 @@ users authenticate with Google Accounts by integrating Google Sign-In
 
 ## User Story  
 1. new: filter latest 1 month products  
-2. select productss and add to cart  
+2. select products and add to the cart  
 3. remove item from cart  
-4. submit your shopping list  
+4. submit shopping list  
+5. get order list in user detail
 
 
 ## Installing
