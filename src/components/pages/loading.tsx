@@ -5,7 +5,7 @@ import { SpingWrapper } from './Styled'
 const Loading = () => {
     return (
         <SpingWrapper>
-           <Spin size="large" />  
+            <Spin size="large" />
         </SpingWrapper >
     )
 }

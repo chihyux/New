@@ -10,7 +10,7 @@ const { Header, Content } = Layout;
 const LayoutWrapper = styled(Layout)`
   background: #fff;
   height: 100vh;
-` 
+`
 const HeaderWrapper = styled(Header)`
   background: none;
 `
@@ -26,10 +26,10 @@ const App: React.FC = () => {
   return (
     <LayoutWrapper>
       <HeaderWrapper>
-         <Navbar />
+        <Navbar />
       </HeaderWrapper>
       <ContentWrapper>
-         { renderRoutes(routes) }
+        {renderRoutes(routes)}
       </ContentWrapper>
     </LayoutWrapper>
   )

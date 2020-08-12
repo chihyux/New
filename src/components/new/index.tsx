@@ -5,7 +5,7 @@ import { ProductListWrapper } from '../products/Styled'
 const New = () => {
     return (
         <ProductListWrapper>
-            <NewProductList />      
+            <NewProductList />
         </ProductListWrapper>
     )
 }

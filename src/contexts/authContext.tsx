@@ -6,12 +6,12 @@ import { notification } from 'antd';
 
 export const Auth = createContext({} as IContext)
 
-const initialState:IState = {
+const initialState: IState = {
     user: '',
     authMessage: ''
 }
 
-export const AuthProvider:React.FC<{}> = ({ children }) => {
+export const AuthProvider: React.FC<{}> = ({ children }) => {
     const [state, dispatch] = useReducer(firebaseAuth, initialState)
     const [api, contextHolder] = notification.useNotification();
     const [currentUser, setCurrentUser] = useState<string>('')
@@ -22,10 +22,10 @@ export const AuthProvider:React.FC<{}> = ({ children }) => {
     }, [uid])
 
     const findCurrentUser = () => {
-        firebase.auth().onAuthStateChanged((user:any) => {
-            if(user) {
-               setCurrentUser(user.email)
-               setUid(user.uid)
+        firebase.auth().onAuthStateChanged((user: any) => {
+            if (user) {
+                setCurrentUser(user.email)
+                setUid(user.uid)
             }
         });
     }
@@ -40,14 +40,14 @@ export const AuthProvider:React.FC<{}> = ({ children }) => {
         </Auth.Consumer>
     )
 
-    const openNotification = (placement:string) => {
-      api.info({
-        message: `Notification ${placement}`,
-        description: des
-      });
+    const openNotification = (placement: string) => {
+        api.info({
+            message: `Notification ${placement}`,
+            description: des
+        });
     };
 
-    const value = { state, dispatch, openNotification, contextHolder, currentUser,removeCurrentUser, uid }
+    const value = { state, dispatch, openNotification, contextHolder, currentUser, removeCurrentUser, uid }
     return (
         <Auth.Provider value={value as IContext}>
             {children}

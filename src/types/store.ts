@@ -13,7 +13,7 @@ export type Products = {
 
 export interface ProductContext {
     state: IProduct;
-    dispatch: ({type}: {type:string}) => void;
+    dispatch: ({ type }: { type: string }) => void;
 }
 
 export type IProduct = {
@@ -54,7 +54,7 @@ export interface IContext {
     dispatch: any;
     currentUser: string;
     contextHolder: React.ReactNode;
-    openNotification: (placement:string) => void;
+    openNotification: (placement: string) => void;
     removeCurrentUser: () => void;
     uid: string;
 }

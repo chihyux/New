@@ -66,7 +66,7 @@ export const AuthWrapper = styled.div`
       width: 80%;
     }
 `
-export const AuthBtn =  styled.div`
+export const AuthBtn = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;

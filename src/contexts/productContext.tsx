@@ -8,26 +8,27 @@ const newProductList: Array<Products> = []
 
 export const ProductsStore = createContext({} as ProductContext)
 
-const defaultContext:IProduct = {
+const defaultContext: IProduct = {
     productList,
     newProductList
 }
 
-export const ProductsProvider:React.FC<{}> = ({ children }) => {
-    const [state, dispatch] = useReducer(firebaseProducts, defaultContext as IProduct )
+export const ProductsProvider: React.FC<{}> = ({ children }) => {
+    const [state, dispatch] = useReducer(firebaseProducts, defaultContext as IProduct)
 
     useEffect(() => {
         firebase.firestore().collection('products').get()
-        .then((querySnapshot:any) => {
-        console.log('fetching...')
-        let products:Products[] = []
-        querySnapshot.forEach((doc:any) => {
-        products.push({
-            id: doc.id,
-            ...doc.data()})
-        })
-        dispatch({ type: 'GET_PRODUCTS', productList: products })
-    })
+            .then((querySnapshot: any) => {
+                console.log('fetching...')
+                let products: Products[] = []
+                querySnapshot.forEach((doc: any) => {
+                    products.push({
+                        id: doc.id,
+                        ...doc.data()
+                    })
+                })
+                dispatch({ type: 'GET_PRODUCTS', productList: products })
+            })
     }, [])
 
     useEffect(() => {
@@ -36,26 +37,27 @@ export const ProductsProvider:React.FC<{}> = ({ children }) => {
         const nowMonth = new Date(nowDay).getMonth()
         const nowYear = new Date(nowDay).getFullYear()
 
-        const nowMonthFirstDay = new Date(nowYear,nowMonth,1)
-        const nowMonthDay = new Date(nowYear,nowMonth,0).getDate() -1
-        const nowMonthEndDay = new Date(nowYear,nowMonth,nowMonthDay)
+        const nowMonthFirstDay = new Date(nowYear, nowMonth, 1)
+        const nowMonthDay = new Date(nowYear, nowMonth, 0).getDate() - 1
+        const nowMonthEndDay = new Date(nowYear, nowMonth, nowMonthDay)
 
         firebase.firestore().collection('products')
-        .where('update','>=',nowMonthFirstDay)
-        .where('update','<=',nowMonthEndDay)
-        .get()
-        .then((querySnapshot:any) => {
-        let newProducts:Products[] = []
-        querySnapshot.forEach((doc:any) => {
-        newProducts.push({
-            id: doc.id,
-            ...doc.data()})
-        })
-        dispatch({ type:'GET_NEWEST_PRODUCTS', newProductList: newProducts })
-    })
+            .where('update', '>=', nowMonthFirstDay)
+            .where('update', '<=', nowMonthEndDay)
+            .get()
+            .then((querySnapshot: any) => {
+                let newProducts: Products[] = []
+                querySnapshot.forEach((doc: any) => {
+                    newProducts.push({
+                        id: doc.id,
+                        ...doc.data()
+                    })
+                })
+                dispatch({ type: 'GET_NEWEST_PRODUCTS', newProductList: newProducts })
+            })
     }, [])
 
-    
+
     const value = { state, dispatch }
     return (
         <ProductsStore.Provider value={value as ProductContext}>

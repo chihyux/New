@@ -9,14 +9,14 @@ import { ProductsProvider } from './contexts/productContext'
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-     <Switch>
-    <AuthProvider>
-      <ProductsProvider>
-        <GlobalStyle />
-          <App />
-      </ProductsProvider>
-    </AuthProvider>
-     </Switch> 
+      <Switch>
+        <AuthProvider>
+          <ProductsProvider>
+            <GlobalStyle />
+            <App />
+          </ProductsProvider>
+        </AuthProvider>
+      </Switch>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
