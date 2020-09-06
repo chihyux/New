@@ -43,7 +43,6 @@ const Detail = () => {
                         count: count
                     }
                 }, { merge: true })
-                .catch(err => console.log(err))
             return userOrdered
         } else {
             setRouteRedirect(true)

@@ -19,7 +19,6 @@ export const ProductsProvider: React.FC<{}> = ({ children }) => {
     useEffect(() => {
         firebase.firestore().collection('products').get()
             .then((querySnapshot: any) => {
-                console.log('fetching...')
                 let products: Products[] = []
                 querySnapshot.forEach((doc: any) => {
                     products.push({

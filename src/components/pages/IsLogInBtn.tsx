@@ -11,7 +11,6 @@ const IsLogInBtn: React.FC = () => {
 
     const fetchLogOut = async () => {
         const logout = await firebase.auth().signOut()
-            .catch(err => console.log(err))
         return logout
     }
 

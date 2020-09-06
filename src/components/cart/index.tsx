@@ -58,7 +58,6 @@ const Cart: React.FC = () => {
           firebase.firestore().collection('cartList').doc(uid).delete()
           setCartList([])
         })
-        .catch(err => console.log(err))
       return userOrdered
     }
   }
@@ -96,16 +95,16 @@ const Cart: React.FC = () => {
             <List.Item.Meta
               title={item.name}
               description={
-              <div className='cart-detail' style={{ display: 'flex' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', width: '95%' }}>
-                  <span>顏色: {item.color}</span>
-                  <span>尺寸: {item.size}</span>
-                  <span>數量: {item.count}</span>
+                <div className='cart-detail' style={{ display: 'flex' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', width: '95%' }}>
+                    <span>顏色: {item.color}</span>
+                    <span>尺寸: {item.size}</span>
+                    <span>數量: {item.count}</span>
+                  </div>
+                  <div>
+                    <img style={{ width: 50, height: 50 }} src={item.img} alt={item.name} />
+                  </div>
                 </div>
-                <div>
-                  <img style={{ width: 50, height: 50 }} src={item.img} alt={item.name} />
-                </div>
-              </div>
               }
             />
           </List.Item>
