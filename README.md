@@ -1,5 +1,5 @@
 # Shopping cart
-by using React Hooks / Context / Reducer.  
+by using React Hooks 
 database: firebase Cloud Firestore  
 framework: ant design  
 
