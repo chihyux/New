@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col } from 'antd';
+import { Row, Col } from 'antd'
 import sceneSky from './image/photo-1553649084-3e42773ff0e3.jpg'
 import swim from './image/photo-1467632499275-7a693a761056.jpg'
 import skirt from './image/photo-1584998316204-3b1e3b1895ae.jpg'
@@ -13,8 +13,8 @@ const Home = () => {
 
     return (
         <IndexWrapper>
-            <Row gutter={[0, 56]} align='middle'>
-                <Col span={6} offset={5}>
+            <Row gutter={[0, 48]} align='middle' justify='center'>
+                <Col xs={{ span: 8, offset: 2 }} sm={{ span: 10, offset: 2 }} md={{ span: 8 }} >
                     <LightSpeed left cascade>
                         <div className='days'>
                             <span>Days </span>
@@ -22,14 +22,14 @@ const Home = () => {
                         </div>
                     </LightSpeed>
                 </Col>
-                <Col span={10}>
+                <Col xs={{ span: 12 }} sm={{ span: 10 }} md={{ span: 10, offset: 1 }} >
                     <Fade right>
                         <img src={sceneSky} alt='Summer Sky' style={{ width: '80%' }} />
                     </Fade>
                 </Col>
             </Row>
-            <Row gutter={[0, 56]} align='middle' className='parallax'>
-                <Col span={12} offset={6}>
+            <Row gutter={[0, 56]} >
+                <Col xs={{ span: 16, offset: 4 }} sm={{ span: 16, offset: 4 }} md={{ span: 12, offset: 6 }}>
                     <Fade left cascade delay={2000}>
                         <div>
                             <div className='collection'>
@@ -44,16 +44,16 @@ const Home = () => {
                     </Fade>
                 </Col>
             </Row>
-            <Row gutter={[0, 56]} align='middle'>
-                <Col span={24} className='sea' />
-            </Row>
-            <Row gutter={[0, 56]} className='bottom'>
-                <Col span={12} offset={4}>
+            <div className='parallax'></div>
+            <Row gutter={[0, 48]} align='bottom' className='bottom'>
+                <Col
+                    xs={{ span: 16, offset: 4 }} sm={{ span: 11, offset: 2 }} md={{ span: 9, offset: 4 }}
+                >
                     <Fade>
                         <img src={swim} alt='Summer' style={{ width: '85%' }} />
                     </Fade>
                 </Col>
-                <Col span={8}>
+                <Col xs={{ span: 16, offset: 4 }} sm={{ span: 8, offset: 1 }} md={{ span: 6, offset: 1 }}>
                     <Fade right cascade>
                         <div>
                             <span className='sunshine'>SUNSHINE</span>

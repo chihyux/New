@@ -1,6 +1,6 @@
 import React from 'react'
 import ProductList from './productList'
-import { ProductListWrapper } from './Styled'
+import { ProductListWrapper } from './style/Styled'
 
 const Products: React.FC = () => {
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderRoutes } from 'react-router-config';
 import routes from './route'
-import Navbar from './components/pages/navbar'
+import Navbar from './components/pages/navbar/navbar'
 import 'antd/dist/antd.css';
 import { Layout } from 'antd';
 import styled from 'styled-components';

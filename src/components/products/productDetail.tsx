@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { useParams, Redirect } from 'react-router-dom'
 import { ProductsStore } from '../../contexts/productContext'
 import { Row, Col, Select, Divider, InputNumber, Button, Modal } from 'antd'
-import { ProductDetail, ProductWrapper } from './Styled'
+import { ProductDetail, ProductWrapper } from './style/Styled'
 import firebase from '../../config/config'
 import { Auth } from 'contexts/authContext'
 import { Products } from 'types/store'
@@ -54,13 +54,13 @@ const Detail = () => {
             {productList.filter((item: Products) => id === item.id)
                 .map(item => {
                     return (
-                        <Row gutter={[40, 16]} key={item.id}>
-                            <Col span={15}>
+                        <Row gutter={[24, 16]} key={item.id}>
+                            <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 15 }} >
                                 <div>
                                     <img style={{ width: '100%' }} alt={item.name} src={item.img} />
                                 </div>
                             </Col>
-                            <Col span={8}>
+                            <Col xs={{ span: 24 }} sm={{ span: 24 }} md={{ span: 9 }}>
                                 <ProductDetail>
                                     <div className='details name'>{item.name}</div>
                                     <div className='details color'>{item.color}</div>

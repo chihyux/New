@@ -2,7 +2,7 @@ import React, { createContext, useState, useReducer, useEffect } from 'react'
 import { firebaseAuth } from '../reducer/authReducer'
 import { IContext, IState } from '../types/store'
 import firebase from '../config/config'
-import { notification } from 'antd';
+import { notification } from 'antd'
 
 export const Auth = createContext({} as IContext)
 

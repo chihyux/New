@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
-import { Menu, Dropdown, Avatar } from 'antd';
-import { DownOutlined, UserOutlined } from '@ant-design/icons';
-import { Auth } from '../../contexts/authContext'
-import { Link } from 'react-router-dom';
-import { MenuInnerWrapper } from './Styled'
+import { Menu, Dropdown, Avatar } from 'antd'
+import { DownOutlined, UserOutlined } from '@ant-design/icons'
+import { Auth } from '../../../contexts/authContext'
+import { Link } from 'react-router-dom'
+import { MenuInnerWrapper } from '../style/Styled'
+
 const DropMenu = () => {
   const { currentUser, uid } = useContext(Auth)
 
@@ -13,10 +14,10 @@ const DropMenu = () => {
         帳戶資訊
       </Menu.Item>
       <Menu.Item key="1">
-        <Link to={'/user/' + uid + '/ordered'}>訂單查詢</Link>
+        <Link to={`/user/${uid}/ordered`}>訂單查詢</Link>
       </Menu.Item>
     </Menu>
-  );
+  )
 
   return (
     <Dropdown overlay={menu} trigger={['click']}>

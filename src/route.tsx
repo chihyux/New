@@ -2,7 +2,7 @@ import SignUp from 'components/auth/signUp'
 import LogIn from 'components/auth/logIn'
 import Nomatch from './components/pages/nomatch'
 import { RouteProps } from 'react-router-dom'
-import Loadable from 'react-loadable';
+import Loadable from 'react-loadable'
 import React from 'react'
 import Loading from 'components/pages/loading'
 

@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { ProductsStore } from '../../contexts/productContext'
 import { Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
-import { ProductListCard, ListDetail } from './Styled'
+import { ProductListCard, ListDetail } from './style/Styled'
 
 const ProductList = () => {
     const { state } = useContext(ProductsStore)

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Row, Col } from 'antd';
 import { Link } from 'react-router-dom';
-import { ProductListCard, ListDetail } from '../products/Styled'
+import { ProductListCard, ListDetail } from '../products/style/Styled'
 import { ProductsStore } from '../../contexts/productContext'
 
 const NewProductList = () => {

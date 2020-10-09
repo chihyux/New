@@ -1,6 +1,6 @@
 import React from 'react'
 import NewProductList from './newProductList'
-import { ProductListWrapper } from '../products/Styled'
+import { ProductListWrapper } from '../products/style/Styled'
 
 const New = () => {
     return (

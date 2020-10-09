@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Menu } from 'antd'
 
 export const Logo = styled.span`
     span {
@@ -23,9 +24,13 @@ export const Logo = styled.span`
     }
 `
 
-export const BtnWrapper = styled.div`
+export const SubMenu = styled(Menu.SubMenu)`
     float: right;
+    .ant-menu-submenu-arrow {
+      display: none;
+    }
 `
+
 // drop menu
 export const MenuInnerWrapper = styled.div`
   > * {
@@ -33,7 +38,6 @@ export const MenuInnerWrapper = styled.div`
     font-size: 12px;
   }
 `
-
 //spin
 export const SpingWrapper = styled.div`
     width: 100%;
@@ -43,3 +47,4 @@ export const SpingWrapper = styled.div`
     align-items: center;
     margin: 0 auto;
 `
+

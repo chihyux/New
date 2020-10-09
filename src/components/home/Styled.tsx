@@ -5,23 +5,31 @@ export const IndexWrapper = styled.div`
     margin: 3em auto;
     text-align: center;
     overflow: hidden;
+    background: url(${sceneSea}) left center repeat-y;
+    background-attachment: fixed;
+    background-size: cover;
+
     .ant-row {
         background: #fff;
     }
     span {
-        font-size: 6em;
+        font-size: 3em;
         font-family: 'Caveat',cursive;
         color: #d6d5b9;
         text-align: left;
         white-space: nowrap;
-        @media(max-width: 580px) {
-            font-size: 2em;
+        
+        @media(min-width: 480px) {
+            font-size: 5em;
+        }
+        @media(min-width: 768px) {
+            font-size: 6em;
         }
     }
     .bottom {
         background: #fff;
-        margin: 30em 0 0 0;
-        padding: 7em 0;
+        margin: 0 !important;
+        padding: 5em 0;
     }
     .days {
         position: relative;
@@ -42,22 +50,6 @@ export const IndexWrapper = styled.div`
         top: 2em;
         z-index:2;
     }
-    .sea {
-        height: 800px;
-        max-height: 800px;
-        overflow: hidden;
-        z-index: -1;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background: url(${sceneSea}) left bottom no-repeat;
-        background-size: 100%;
-    }
-    .parallax {
-        margin-bottom: 600px !important;
-        background: #fff;
-        padding: 0 0 5em 0;
-    }
     .collection {
         padding: 8em 0;
         span {
@@ -70,14 +62,21 @@ export const IndexWrapper = styled.div`
             }
         }
     }
+    .parallax {
+        height: 40em;
+        max-height: 40em;
+        background: transparent;
+    }
     .sunshine {
-        position: relative;
-        left: -3em;
+        left: 0;
+        @media(min-width: 480px) {
+            left: -1.25em;
+            top: 0.5em;
+            z-index: 2;
+            position: relative;
+    }
     }
     .summer-hat {
         width: 65%;
-        position: absolute;
-        bottom: 6em;
-        right: 4em;
     }
 `

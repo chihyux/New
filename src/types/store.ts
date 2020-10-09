@@ -44,7 +44,6 @@ interface IGetNewProducts {
 
 export type ProductsAction = IGetProducts | IGetNewProducts;
 
-//
 export type Props = {
     children: React.ReactNode;
 }

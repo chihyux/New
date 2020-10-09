@@ -1,10 +1,9 @@
 import React, { useContext } from 'react'
-import firebase from '../../config/config'
-import { Auth } from '../../contexts/authContext'
-import { BtnWrapper } from './Styled'
+import firebase from '../../../config/config'
+import { Auth } from '../../../contexts/authContext'
 import { Button, Space } from 'antd'
 import DropMenu from './dropMenu'
-import Cart from '../cart/index'
+import Cart from '../../cart/index'
 
 const IsLogInBtn: React.FC = () => {
     const { dispatch, openNotification, removeCurrentUser } = useContext(Auth)
@@ -24,13 +23,11 @@ const IsLogInBtn: React.FC = () => {
         })
     }
     return (
-        <BtnWrapper>
-            <Space size='middle'>
-                <Cart />
-                <DropMenu />
-                <Button type='dashed' onClick={logout}>登出</Button>
-            </Space>
-        </BtnWrapper>
+        <Space size='middle'>
+            <Cart />
+            <DropMenu />
+            <Button type='dashed' onClick={logout}>登出</Button>
+        </Space>
     )
 }
 

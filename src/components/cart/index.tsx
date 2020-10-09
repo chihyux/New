@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
-import { Button, Drawer, List } from 'antd';
-import { ShoppingCartOutlined } from '@ant-design/icons';
+import { Button, Drawer, List } from 'antd'
+import { ShoppingCartOutlined } from '@ant-design/icons'
 import firebase from '../../config/config'
-import { Auth } from 'contexts/authContext';
+import { Auth } from 'contexts/authContext'
 import { CartList, Products } from '../../types/store'
 
 const Cart: React.FC = () => {

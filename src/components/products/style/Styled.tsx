@@ -2,8 +2,11 @@ import styled from 'styled-components'
 import { Card } from 'antd'
 
 export const ProductWrapper = styled.div`
-    width: 60%;
+    width: 80%;
     margin: 2em auto;
+    @media(min-width: 768px) {
+        width: 60%;
+    }
 `
 export const ProductDetail = styled.div`
     display: flex;
