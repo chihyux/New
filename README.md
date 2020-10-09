@@ -1,6 +1,6 @@
 # Shopping cart
 
-![image](https://github.com/chihyux/shopping_site/tree/master/public/cart.png)
+![image](https://github.com/chihyux/shopping_site/blob/master/public/cart.png)
 
 by using React Hooks  
 database: firebase Cloud Firestore  
